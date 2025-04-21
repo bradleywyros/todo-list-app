@@ -1,13 +1,20 @@
-# frozen_string_literal: true
-
 class Users::RegistrationsController < Devise::RegistrationsController
   include RackSessionsFix
   
   respond_to :json
 
+  before_action :configure_permitted_parameters, only: %i[ create ]
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password])
+  end
+
   private
 
   def respond_with(current_user, _opts = {})
+    Rails.logger.info("Current user: #{current_user.inspect}")
     if current_user.persisted?
       render json: {
         status: {code: 200, message: 'Signed up successfully.'},
@@ -19,4 +26,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
       }, status: :unprocessable_entity
     end
   end
+  
 end
