@@ -3,9 +3,10 @@ class ApplicationController < ActionController::API
   before_action :log_auth_token
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def test
-    render json: { message: "Authentication successful" }
-  end
+  skip_before_action :log_auth_token, only: [:create, :new], if: -> { 
+    (controller_path == 'users/sessions' && action_name == 'create') ||
+    (controller_path == 'users/registrations' && action_name == 'create')
+  }
 
   protected
   

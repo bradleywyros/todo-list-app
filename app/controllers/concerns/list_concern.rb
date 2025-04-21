@@ -1,6 +1,8 @@
 module ListConcern
   extend ActiveSupport::Concern
 
+  ITEM_STATUS = ['pending', 'completed', 'in_progress']
+
   class UnexpectedParameters < StandardError; end
 
   included do
@@ -34,8 +36,6 @@ module ListConcern
         }
       end
     end
-
-    ITEM_STATUS = ['pending', 'completed', 'in_progress']
   
     def filter_list_items(items)
       if params[:status]

@@ -73,7 +73,11 @@ module Admin
     end
   
     def parse_params
-      params[:duedate] = validate_date(params[:duedate]) if params[:duedate].present?
+      begin
+        params[:duedate] = validate_date(params[:duedate]) if params[:duedate].present?
+      rescue StandardError => err
+        render json: { error: err.class.name, message: err.message }, status: :unprocessable_entity # Better message handling?
+      end
     end
   
     def item_params
