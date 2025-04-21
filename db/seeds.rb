@@ -5,19 +5,13 @@ Item.delete_all
 List.delete_all
 User.delete_all
 
-user_password = 'bradroz'
-puts "User Password length: #{user_password.length}"
-user = User.create!(name: 'bradroz', email: 'bradleywyros@gmail.com', password: user_password)
-other_password = 'testUser2'
-puts "Other Password length: #{other_password.length}"
-other_user = User.create!(name: 'testUser2', email: 'bradleywyros@yahoo.com', password: other_password)
-admin_password = 'BrAdmin123'
-puts "Admin Password length: #{admin_password.length}"
-admin = User.create!(name: 'BrAdmin', email: 'bradmin@gmail.com', password: admin_password, admin: true)
+user1 = User.create!(name: 'User1', email: 'no-reply@email.com', password: 'User1Pw')
+user2 = User.create!(name: 'User2', email: 'no-reply2@email.com', password: 'User2Pw')
+admin = User.create!(name: 'Admin', email: 'no-reply-admin@email.com', password: 'AdminPw123', admin: true)
 
 list = List.create(
   name: "My Todo List",
-  user_id: user.id
+  user_id: user1.id
 )
 
 10.times do
@@ -31,7 +25,7 @@ end
 
 list_2 = List.create(
   name: 'Test User 2 List',
-  user_id: other_user.id
+  user_id: user2.id
 )
 
 10.times do
