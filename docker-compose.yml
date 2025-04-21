@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+    web:
+        env_file:
+            - .env
+        build: .
+        image: rails-docker
+        restart: "no"
+        environment:
+            - DBHOST=postgresql
+            - DBUSER=${TODO_LIST_APP_RAILS_DATABASE_USER}
+            - DBPASS=${TODO_LIST_APP_RAILS_DATABASE_PASSWORD}
+            - DEVISE_JWT_SECRET_KEY=${DEVISE_JWT_SECRET_KEY}
+            - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+        ports:
+            - 3000:3000
+        depends_on:
+            - postgresql
+
+    postgresql:
+        image: postgres
+        restart: "no"
+        ports:
+            - 5433:5432
+        environment:
+            POSTGRES_DB: ${TODO_LIST_APP_RAILS_DATABASE}
+            POSTGRES_USER: ${TODO_LIST_APP_RAILS_DATABASE_USER}
+            POSTGRES_PASSWORD: ${TODO_LIST_APP_RAILS_DATABASE_PASSWORD}
+        volumes:
+            - postgresdb:/var/lib/postgresql/data/
+
+volumes:
+    postgresdb:
