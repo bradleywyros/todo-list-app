@@ -25,7 +25,7 @@ An API-Only Ruby on Rails app designed to manage a ToDo lists at a personal or a
 
 ## Getting Started
 
-# Tech Prerequistes
+# Tech Prerequisites
 
 * Docker / Docker Compose
 * Git
@@ -62,7 +62,7 @@ docker-compose run web rake db:seed
 ```
 
 5. Access application URL. *Note that this is API only*
-* <ins>http://localhost:3000</ins>
+* http://localhost:3000
 
 ## API Endpoints
 
