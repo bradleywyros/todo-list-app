@@ -25,7 +25,7 @@ An API-Only Ruby on Rails app designed to manage a ToDo lists at a personal or a
 
 ## Getting Started
 
-# Tech Prerequisites
+# Prerequisites
 
 * Docker / Docker Compose
 * Git
